@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Mvc.Data;
+using Library.Mvc.Data.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.Mvc
 {
@@ -22,6 +25,8 @@ namespace Library.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase(""));
+            services.AddTransient<IBookService, BookService>();
             services.AddControllersWithViews();
         }
 
